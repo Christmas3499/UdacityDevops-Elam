@@ -1,20 +1,20 @@
 variable "subscription_id" {
-  default = "7da9aa2a-dee5-47d2-8cc8-ccb1d2a68c2d"
+  default = "622411f9-056b-4cd2-8612-cd26091f1c5c"
   type = string
 }
 
 variable "client_id" {
-  default = "587b1ccc-6db4-463b-8180-c9b3c218e807"
+  default = "ac1b87b0-7786-4a07-8b97-dbed0c91348a"
   type = string
 }
 
 variable "client_secret" {
-  default = "rAH8Q~6RqVhI6aoPOjhuhLk4PToSLJqalL_R9bi9"
+  default = "3zV8Q~mrb1fDvmkamu64gCq9DzcSnQPIZVokHcO7"
   type = string
 }
 
 variable "tenant_id" {
-  default = "4dde8df8-a59e-47d6-8eeb-86daff8a2f5d"
+  default = "f958e84a-92b8-439f-a62d-4f45996b6d07"
   type = string
 }
 
@@ -31,7 +31,7 @@ variable "resource_group" {
 
 variable "location" {
   description = "The Azure Region in which all resources in this example should be created, udacity created resource group in South Central US"
-  default     = "South Central US"
+  default     = "East US"
 }
 
 variable "username" {

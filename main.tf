@@ -1,3 +1,14 @@
+# We strongly recommend using the required_providers block to set the
+# Azure Provider source and version being used
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.17.0"
+    }
+  }
+}
+
 provider "azurerm" {
 
   subscription_id = var.subscription_id
@@ -24,9 +35,8 @@ data "azurerm_image" "webserver" {
 #============================================================================
 #create the resource group, already taken from codelab
 
-resource "azurerm_resource_group" "main" {
+data "azurerm_resource_group" "Azuredevops" {
   name     = var.resource_group
-  location = var.location
 }
 
 #============================================================================
@@ -35,9 +45,9 @@ resource "azurerm_resource_group" "main" {
 resource "azurerm_virtual_network" "main" {
   name                = "${var.resource_group}-network"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
-  tags = local.tags
+  location            = data.azurerm_resource_group.Azuredevops.location
+  resource_group_name = data.azurerm_resource_group.Azuredevops.name
+  tags = {"resources": "resources"}
 }
 
 #============================================================================
@@ -45,7 +55,7 @@ resource "azurerm_virtual_network" "main" {
 
 resource "azurerm_subnet" "main" {
   name                 = "${var.resource_group}-subnet"
-  resource_group_name  = azurerm_resource_group.main.name
+  resource_group_name  = data.azurerm_resource_group.Azuredevops.name
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = ["10.0.2.0/24"]
 }
@@ -55,9 +65,9 @@ resource "azurerm_subnet" "main" {
 
 resource "azurerm_network_security_group" "main" {
   name                = "${var.resource_group}-nsg"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
-  tags = local.tags
+  resource_group_name = data.azurerm_resource_group.Azuredevops.name
+  location            = data.azurerm_resource_group.Azuredevops.location
+  tags = {"resources": "resources"}
 }
 
 #============================================================================
@@ -73,7 +83,7 @@ resource "azurerm_network_security_rule" "DenyInboundInternet" {
   protocol                    = "*"
   destination_port_range      = "*"
   source_port_range           = "*"
-  resource_group_name         = azurerm_resource_group.main.name
+  resource_group_name         = data.azurerm_resource_group.Azuredevops.name
   network_security_group_name = azurerm_network_security_group.main.name
 }
 
@@ -85,9 +95,9 @@ resource "azurerm_network_security_rule" "AllowInboundVM" {
   direction                    = "Inbound"
   access                       = "Allow"
   protocol                     = "*"
-  source_port_ranges           = azurerm_virtual_network.main.address_space
-  destination_port_ranges      = azurerm_virtual_network.main.address_space
-  resource_group_name          = azurerm_resource_group.main.name
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  resource_group_name          = data.azurerm_resource_group.Azuredevops.name
   network_security_group_name  = azurerm_network_security_group.main.name
 }
 
@@ -99,9 +109,9 @@ resource "azurerm_network_security_rule" "AllowOutboundVM" {
   direction                    = "Outbound"
   access                       = "Allow"
   protocol                     = "*"
-  source_port_ranges           = azurerm_virtual_network.main.address_space
-  destination_port_ranges      = azurerm_virtual_network.main.address_space
-  resource_group_name          = azurerm_resource_group.main.name
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  resource_group_name          = data.azurerm_resource_group.Azuredevops.name
   network_security_group_name  = azurerm_network_security_group.main.name
 }
 
@@ -113,9 +123,9 @@ resource "azurerm_network_security_rule" "AllowInboundLB" {
   direction                    = "Inbound"
   access                       = "Allow"
   protocol                     = "*"
-  source_port_ranges           = azurerm_virtual_network.main.address_space
-  destination_port_ranges      = azurerm_virtual_network.main.address_space
-  resource_group_name          = azurerm_resource_group.main.name
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  resource_group_name          = data.azurerm_resource_group.Azuredevops.name
   network_security_group_name  = azurerm_network_security_group.main.name
 }
 
@@ -125,15 +135,15 @@ resource "azurerm_network_security_rule" "AllowInboundLB" {
 resource "azurerm_network_interface" "main" {
   count               = var.number_of_vm
   name                = "${var.resource_group}-${count.index}-nic"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.Azuredevops.name
+  location            = data.azurerm_resource_group.Azuredevops.location
 
   ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.main.id
     private_ip_address_allocation = "Dynamic"
   }
-  tags = local.tags
+  tags                            = {"resources": "resources"}
 }
 
 #============================================================================
@@ -141,10 +151,10 @@ resource "azurerm_network_interface" "main" {
 
 resource "azurerm_public_ip" "main" {
   name                = "${var.resource_group}-public-ip"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.Azuredevops.name
+  location            = data.azurerm_resource_group.Azuredevops.location
   allocation_method   = "Static"
-  tags                = local.tags
+  tags                = {"resources": "resources"}
 }
 
 #============================================================================
@@ -152,13 +162,15 @@ resource "azurerm_public_ip" "main" {
 
 resource "azurerm_lb" "main" {
   name                = "${var.resource_group}-lb"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.Azuredevops.name
+  location            = data.azurerm_resource_group.Azuredevops.location
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
     public_ip_address_id = azurerm_public_ip.main.id
   }
+
+  tags                = {"resources": "resources"}
 }
 
 #============================================================================
@@ -184,17 +196,17 @@ resource "azurerm_network_interface_backend_address_pool_association" "main" {
 
 resource "azurerm_availability_set" "main" {
   name                = "${var.resource_group}-aset"
-  resource_group_name = azurerm_resource_group.main.name
-  location            = azurerm_resource_group.main.location
-  tags                = local.tags
+  resource_group_name = data.azurerm_resource_group.Azuredevops.name
+  location            = data.azurerm_resource_group.Azuredevops.location
+  tags                = {"resources": "resources"}
 }
 
 #============================================================================
 resource "azurerm_linux_virtual_machine" "main" {
   count                           = var.number_of_vm
   name                            = "${var.resource_group}-vm-${count.index}"
-  resource_group_name             = azurerm_resource_group.main.name
-  location                        = azurerm_resource_group.main.location
+  resource_group_name             = data.azurerm_resource_group.Azuredevops.name
+  location                        = data.azurerm_resource_group.Azuredevops.location
   size                            = "Standard_D2s_v3"
   admin_username                  = var.username
   admin_password                  = var.password
@@ -211,5 +223,5 @@ resource "azurerm_linux_virtual_machine" "main" {
     caching              = "ReadWrite"
   }
 
-  tags = local.tags
+  tags = {"resources": "resources"}
 }

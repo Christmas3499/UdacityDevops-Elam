@@ -1,0 +1,446 @@
+data.azurerm_image.webserver: Reading...
+data.azurerm_resource_group.Azuredevops: Reading...
+data.azurerm_resource_group.Azuredevops: Read complete after 0s [id=/subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops]
+data.azurerm_image.webserver: Read complete after 0s [id=/subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/WebServerImage]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # azurerm_availability_set.main will be created
+  + resource "azurerm_availability_set" "main" {
+      + id                           = (known after apply)
+      + location                     = "eastus"
+      + managed                      = true
+      + name                         = "Azuredevops-aset"
+      + platform_fault_domain_count  = 3
+      + platform_update_domain_count = 5
+      + resource_group_name          = "Azuredevops"
+      + tags                         = {
+          + "resources" = "resources"
+        }
+    }
+
+  # azurerm_lb.main will be created
+  + resource "azurerm_lb" "main" {
+      + id                   = (known after apply)
+      + location             = "eastus"
+      + name                 = "Azuredevops-lb"
+      + private_ip_address   = (known after apply)
+      + private_ip_addresses = (known after apply)
+      + resource_group_name  = "Azuredevops"
+      + sku                  = "Basic"
+      + sku_tier             = "Regional"
+      + tags                 = {
+          + "resources" = "resources"
+        }
+
+      + frontend_ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + id                                                 = (known after apply)
+          + inbound_nat_rules                                  = (known after apply)
+          + load_balancer_rules                                = (known after apply)
+          + name                                               = "PublicIPAddress"
+          + outbound_rules                                     = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = (known after apply)
+          + private_ip_address_version                         = (known after apply)
+          + public_ip_address_id                               = (known after apply)
+          + public_ip_prefix_id                                = (known after apply)
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_lb_backend_address_pool.main will be created
+  + resource "azurerm_lb_backend_address_pool" "main" {
+      + backend_ip_configurations = (known after apply)
+      + id                        = (known after apply)
+      + inbound_nat_rules         = (known after apply)
+      + load_balancing_rules      = (known after apply)
+      + loadbalancer_id           = (known after apply)
+      + name                      = "Azuredevops-lb-backend-pool"
+      + outbound_rules            = (known after apply)
+    }
+
+  # azurerm_linux_virtual_machine.main[0] will be created
+  + resource "azurerm_linux_virtual_machine" "main" {
+      + admin_password                  = (sensitive value)
+      + admin_username                  = "UdacityProject1"
+      + allow_extension_operations      = true
+      + availability_set_id             = (known after apply)
+      + computer_name                   = (known after apply)
+      + disable_password_authentication = false
+      + extensions_time_budget          = "PT1H30M"
+      + id                              = (known after apply)
+      + location                        = "eastus"
+      + max_bid_price                   = -1
+      + name                            = "Azuredevops-vm-0"
+      + network_interface_ids           = (known after apply)
+      + patch_mode                      = "ImageDefault"
+      + platform_fault_domain           = -1
+      + priority                        = "Regular"
+      + private_ip_address              = (known after apply)
+      + private_ip_addresses            = (known after apply)
+      + provision_vm_agent              = true
+      + public_ip_address               = (known after apply)
+      + public_ip_addresses             = (known after apply)
+      + resource_group_name             = "Azuredevops"
+      + size                            = "Standard_D2s_v3"
+      + source_image_id                 = "/subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/WebServerImage"
+      + tags                            = {
+          + "resources" = "resources"
+        }
+      + virtual_machine_id              = (known after apply)
+
+      + os_disk {
+          + caching                   = "ReadWrite"
+          + disk_size_gb              = (known after apply)
+          + name                      = (known after apply)
+          + storage_account_type      = "Standard_LRS"
+          + write_accelerator_enabled = false
+        }
+
+      + termination_notification {
+          + enabled = (known after apply)
+          + timeout = (known after apply)
+        }
+    }
+
+  # azurerm_linux_virtual_machine.main[1] will be created
+  + resource "azurerm_linux_virtual_machine" "main" {
+      + admin_password                  = (sensitive value)
+      + admin_username                  = "UdacityProject1"
+      + allow_extension_operations      = true
+      + availability_set_id             = (known after apply)
+      + computer_name                   = (known after apply)
+      + disable_password_authentication = false
+      + extensions_time_budget          = "PT1H30M"
+      + id                              = (known after apply)
+      + location                        = "eastus"
+      + max_bid_price                   = -1
+      + name                            = "Azuredevops-vm-1"
+      + network_interface_ids           = (known after apply)
+      + patch_mode                      = "ImageDefault"
+      + platform_fault_domain           = -1
+      + priority                        = "Regular"
+      + private_ip_address              = (known after apply)
+      + private_ip_addresses            = (known after apply)
+      + provision_vm_agent              = true
+      + public_ip_address               = (known after apply)
+      + public_ip_addresses             = (known after apply)
+      + resource_group_name             = "Azuredevops"
+      + size                            = "Standard_D2s_v3"
+      + source_image_id                 = "/subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/WebServerImage"
+      + tags                            = {
+          + "resources" = "resources"
+        }
+      + virtual_machine_id              = (known after apply)
+
+      + os_disk {
+          + caching                   = "ReadWrite"
+          + disk_size_gb              = (known after apply)
+          + name                      = (known after apply)
+          + storage_account_type      = "Standard_LRS"
+          + write_accelerator_enabled = false
+        }
+
+      + termination_notification {
+          + enabled = (known after apply)
+          + timeout = (known after apply)
+        }
+    }
+
+  # azurerm_linux_virtual_machine.main[2] will be created
+  + resource "azurerm_linux_virtual_machine" "main" {
+      + admin_password                  = (sensitive value)
+      + admin_username                  = "UdacityProject1"
+      + allow_extension_operations      = true
+      + availability_set_id             = (known after apply)
+      + computer_name                   = (known after apply)
+      + disable_password_authentication = false
+      + extensions_time_budget          = "PT1H30M"
+      + id                              = (known after apply)
+      + location                        = "eastus"
+      + max_bid_price                   = -1
+      + name                            = "Azuredevops-vm-2"
+      + network_interface_ids           = (known after apply)
+      + patch_mode                      = "ImageDefault"
+      + platform_fault_domain           = -1
+      + priority                        = "Regular"
+      + private_ip_address              = (known after apply)
+      + private_ip_addresses            = (known after apply)
+      + provision_vm_agent              = true
+      + public_ip_address               = (known after apply)
+      + public_ip_addresses             = (known after apply)
+      + resource_group_name             = "Azuredevops"
+      + size                            = "Standard_D2s_v3"
+      + source_image_id                 = "/subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/WebServerImage"
+      + tags                            = {
+          + "resources" = "resources"
+        }
+      + virtual_machine_id              = (known after apply)
+
+      + os_disk {
+          + caching                   = "ReadWrite"
+          + disk_size_gb              = (known after apply)
+          + name                      = (known after apply)
+          + storage_account_type      = "Standard_LRS"
+          + write_accelerator_enabled = false
+        }
+
+      + termination_notification {
+          + enabled = (known after apply)
+          + timeout = (known after apply)
+        }
+    }
+
+  # azurerm_network_interface.main[0] will be created
+  + resource "azurerm_network_interface" "main" {
+      + applied_dns_servers           = (known after apply)
+      + dns_servers                   = (known after apply)
+      + enable_accelerated_networking = false
+      + enable_ip_forwarding          = false
+      + id                            = (known after apply)
+      + internal_dns_name_label       = (known after apply)
+      + internal_domain_name_suffix   = (known after apply)
+      + location                      = "eastus"
+      + mac_address                   = (known after apply)
+      + name                          = "Azuredevops-0-nic"
+      + private_ip_address            = (known after apply)
+      + private_ip_addresses          = (known after apply)
+      + resource_group_name           = "Azuredevops"
+      + tags                          = {
+          + "resources" = "resources"
+        }
+      + virtual_machine_id            = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_network_interface.main[1] will be created
+  + resource "azurerm_network_interface" "main" {
+      + applied_dns_servers           = (known after apply)
+      + dns_servers                   = (known after apply)
+      + enable_accelerated_networking = false
+      + enable_ip_forwarding          = false
+      + id                            = (known after apply)
+      + internal_dns_name_label       = (known after apply)
+      + internal_domain_name_suffix   = (known after apply)
+      + location                      = "eastus"
+      + mac_address                   = (known after apply)
+      + name                          = "Azuredevops-1-nic"
+      + private_ip_address            = (known after apply)
+      + private_ip_addresses          = (known after apply)
+      + resource_group_name           = "Azuredevops"
+      + tags                          = {
+          + "resources" = "resources"
+        }
+      + virtual_machine_id            = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_network_interface.main[2] will be created
+  + resource "azurerm_network_interface" "main" {
+      + applied_dns_servers           = (known after apply)
+      + dns_servers                   = (known after apply)
+      + enable_accelerated_networking = false
+      + enable_ip_forwarding          = false
+      + id                            = (known after apply)
+      + internal_dns_name_label       = (known after apply)
+      + internal_domain_name_suffix   = (known after apply)
+      + location                      = "eastus"
+      + mac_address                   = (known after apply)
+      + name                          = "Azuredevops-2-nic"
+      + private_ip_address            = (known after apply)
+      + private_ip_addresses          = (known after apply)
+      + resource_group_name           = "Azuredevops"
+      + tags                          = {
+          + "resources" = "resources"
+        }
+      + virtual_machine_id            = (known after apply)
+
+      + ip_configuration {
+          + gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          + name                                               = "internal"
+          + primary                                            = (known after apply)
+          + private_ip_address                                 = (known after apply)
+          + private_ip_address_allocation                      = "Dynamic"
+          + private_ip_address_version                         = "IPv4"
+          + subnet_id                                          = (known after apply)
+        }
+    }
+
+  # azurerm_network_interface_backend_address_pool_association.main[0] will be created
+  + resource "azurerm_network_interface_backend_address_pool_association" "main" {
+      + backend_address_pool_id = (known after apply)
+      + id                      = (known after apply)
+      + ip_configuration_name   = "internal"
+      + network_interface_id    = (known after apply)
+    }
+
+  # azurerm_network_interface_backend_address_pool_association.main[1] will be created
+  + resource "azurerm_network_interface_backend_address_pool_association" "main" {
+      + backend_address_pool_id = (known after apply)
+      + id                      = (known after apply)
+      + ip_configuration_name   = "internal"
+      + network_interface_id    = (known after apply)
+    }
+
+  # azurerm_network_interface_backend_address_pool_association.main[2] will be created
+  + resource "azurerm_network_interface_backend_address_pool_association" "main" {
+      + backend_address_pool_id = (known after apply)
+      + id                      = (known after apply)
+      + ip_configuration_name   = "internal"
+      + network_interface_id    = (known after apply)
+    }
+
+  # azurerm_network_security_group.main will be created
+  + resource "azurerm_network_security_group" "main" {
+      + id                  = (known after apply)
+      + location            = "eastus"
+      + name                = "Azuredevops-nsg"
+      + resource_group_name = "Azuredevops"
+      + security_rule       = (known after apply)
+      + tags                = {
+          + "resources" = "resources"
+        }
+    }
+
+  # azurerm_network_security_rule.AllowInboundLB will be created
+  + resource "azurerm_network_security_rule" "AllowInboundLB" {
+      + access                      = "Allow"
+      + destination_address_prefix  = "VirtualNetwork"
+      + destination_port_range      = "*"
+      + direction                   = "Inbound"
+      + id                          = (known after apply)
+      + name                        = "Azuredevops-inbound-allow-lb-SR"
+      + network_security_group_name = "Azuredevops-nsg"
+      + priority                    = 103
+      + protocol                    = "*"
+      + resource_group_name         = "Azuredevops"
+      + source_address_prefix       = "AzureLoadBalancer"
+      + source_port_range           = "*"
+    }
+
+  # azurerm_network_security_rule.AllowInboundVM will be created
+  + resource "azurerm_network_security_rule" "AllowInboundVM" {
+      + access                      = "Allow"
+      + destination_address_prefix  = "VirtualNetwork"
+      + destination_port_range      = "*"
+      + direction                   = "Inbound"
+      + id                          = (known after apply)
+      + name                        = "Azuredevops-inbound-allow-vm-SR"
+      + network_security_group_name = "Azuredevops-nsg"
+      + priority                    = 101
+      + protocol                    = "*"
+      + resource_group_name         = "Azuredevops"
+      + source_address_prefix       = "VirtualNetwork"
+      + source_port_range           = "*"
+    }
+
+  # azurerm_network_security_rule.AllowOutboundVM will be created
+  + resource "azurerm_network_security_rule" "AllowOutboundVM" {
+      + access                      = "Allow"
+      + destination_address_prefix  = "VirtualNetwork"
+      + destination_port_range      = "*"
+      + direction                   = "Outbound"
+      + id                          = (known after apply)
+      + name                        = "Azuredevops-outbound-allow-vm-SR"
+      + network_security_group_name = "Azuredevops-nsg"
+      + priority                    = 102
+      + protocol                    = "*"
+      + resource_group_name         = "Azuredevops"
+      + source_address_prefix       = "VirtualNetwork"
+      + source_port_range           = "*"
+    }
+
+  # azurerm_network_security_rule.DenyInboundInternet will be created
+  + resource "azurerm_network_security_rule" "DenyInboundInternet" {
+      + access                      = "Deny"
+      + destination_address_prefix  = "Internet"
+      + destination_port_range      = "*"
+      + direction                   = "Inbound"
+      + id                          = (known after apply)
+      + name                        = "Azuredevops-inbound-deny-SR"
+      + network_security_group_name = "Azuredevops-nsg"
+      + priority                    = 100
+      + protocol                    = "*"
+      + resource_group_name         = "Azuredevops"
+      + source_address_prefix       = "0.0.0.0/0"
+      + source_port_range           = "*"
+    }
+
+  # azurerm_public_ip.main will be created
+  + resource "azurerm_public_ip" "main" {
+      + allocation_method       = "Static"
+      + fqdn                    = (known after apply)
+      + id                      = (known after apply)
+      + idle_timeout_in_minutes = 4
+      + ip_address              = (known after apply)
+      + ip_version              = "IPv4"
+      + location                = "eastus"
+      + name                    = "Azuredevops-public-ip"
+      + resource_group_name     = "Azuredevops"
+      + sku                     = "Basic"
+      + sku_tier                = "Regional"
+      + tags                    = {
+          + "resources" = "resources"
+        }
+    }
+
+  # azurerm_subnet.main will be created
+  + resource "azurerm_subnet" "main" {
+      + address_prefixes                               = [
+          + "10.0.2.0/24",
+        ]
+      + enforce_private_link_endpoint_network_policies = false
+      + enforce_private_link_service_network_policies  = false
+      + id                                             = (known after apply)
+      + name                                           = "Azuredevops-subnet"
+      + resource_group_name                            = "Azuredevops"
+      + virtual_network_name                           = "Azuredevops-network"
+    }
+
+  # azurerm_virtual_network.main will be created
+  + resource "azurerm_virtual_network" "main" {
+      + address_space       = [
+          + "10.0.0.0/16",
+        ]
+      + dns_servers         = (known after apply)
+      + guid                = (known after apply)
+      + id                  = (known after apply)
+      + location            = "eastus"
+      + name                = "Azuredevops-network"
+      + resource_group_name = "Azuredevops"
+      + subnet              = (known after apply)
+      + tags                = {
+          + "resources" = "resources"
+        }
+    }
+
+Plan: 20 to add, 0 to change, 0 to destroy.
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: solution.plan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "solution.plan"

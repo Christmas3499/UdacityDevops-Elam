@@ -1,79 +1,77 @@
-packer build server.json
 azure-arm: output will be in this color.
 
 ==> azure-arm: Running builder ...
 ==> azure-arm: Getting tokens using client secret
 ==> azure-arm: Getting tokens using client secret
     azure-arm: Creating Azure Resource Manager (ARM) client ...
-==> azure-arm: WARNING: Zone resiliency may not be supported in southcentralus, checkout the docs at https://docs.microsoft.com/en-us/azure/availability-zones/
 ==> azure-arm: Getting source image id for the deployment ...
-==> azure-arm:  -> SourceImageName: '/subscriptions/7da9aa2a-dee5-47d2-8cc8-ccb1d2a68c2d/providers/Microsoft.Compute/locations/southcentralus/publishers/Canonical/ArtifactTypes/vmimage/offers/UbuntuServer/skus/18.04-LTS/versions/latest'
+==> azure-arm:  -> SourceImageName: '/subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/providers/Microsoft.Compute/locations/eastus/publishers/Canonical/ArtifactTypes/vmimage/offers/UbuntuServer/skus/18.04-LTS/versions/latest'
 ==> azure-arm: Using existing resource group ...
 ==> azure-arm:  -> ResourceGroupName : 'Azuredevops'
-==> azure-arm:  -> Location          : 'southcentralus'
+==> azure-arm:  -> Location          : 'eastus'
 ==> azure-arm: Validating deployment template ...
 ==> azure-arm:  -> ResourceGroupName : 'Azuredevops'
-==> azure-arm:  -> DeploymentName    : 'pkrdp8z8kbzdeb2'
+==> azure-arm:  -> DeploymentName    : 'pkrdpyp41ushn6e'
 ==> azure-arm: Deploying deployment template ...
 ==> azure-arm:  -> ResourceGroupName : 'Azuredevops'
-==> azure-arm:  -> DeploymentName    : 'pkrdp8z8kbzdeb2'
+==> azure-arm:  -> DeploymentName    : 'pkrdpyp41ushn6e'
 ==> azure-arm:
 ==> azure-arm: Getting the VM's IP address ...
 ==> azure-arm:  -> ResourceGroupName   : 'Azuredevops'
-==> azure-arm:  -> PublicIPAddressName : 'pkrip8z8kbzdeb2'
-==> azure-arm:  -> NicName             : 'pkrni8z8kbzdeb2'
+==> azure-arm:  -> PublicIPAddressName : 'pkripyp41ushn6e'
+==> azure-arm:  -> NicName             : 'pkrniyp41ushn6e'
 ==> azure-arm:  -> Network Connection  : 'PublicEndpoint'
-==> azure-arm:  -> IP Address          : '20.225.225.254'
+==> azure-arm:  -> IP Address          : '20.85.227.246'
 ==> azure-arm: Waiting for SSH to become available...
 ==> azure-arm: Connected to SSH!
-==> azure-arm: Provisioning with shell script: /tmp/packer-shell3906823128
+==> azure-arm: Provisioning with shell script: /tmp/packer-shell1547150606
 ==> azure-arm: + echo Hello, World!
 ==> azure-arm: + nohup busybox httpd -f -p 80
 ==> azure-arm: Querying the machine's properties ...
 ==> azure-arm:  -> ResourceGroupName : 'Azuredevops'
-==> azure-arm:  -> ComputeName       : 'pkrvm8z8kbzdeb2'
-==> azure-arm:  -> Managed OS Disk   : '/subscriptions/7da9aa2a-dee5-47d2-8cc8-ccb1d2a68c2d/resourceGroups/Azuredevops/providers/Microsoft.Compute/disks/pkros8z8kbzdeb2'
+==> azure-arm:  -> ComputeName       : 'pkrvmyp41ushn6e'
+==> azure-arm:  -> Managed OS Disk   : '/subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Compute/disks/pkrosyp41ushn6e'
 ==> azure-arm: Querying the machine's additional disks properties ...
 ==> azure-arm:  -> ResourceGroupName : 'Azuredevops'
-==> azure-arm:  -> ComputeName       : 'pkrvm8z8kbzdeb2'
+==> azure-arm:  -> ComputeName       : 'pkrvmyp41ushn6e'
 ==> azure-arm: Powering off machine ...
 ==> azure-arm:  -> ResourceGroupName : 'Azuredevops'
-==> azure-arm:  -> ComputeName       : 'pkrvm8z8kbzdeb2'
+==> azure-arm:  -> ComputeName       : 'pkrvmyp41ushn6e'
 ==> azure-arm: Capturing image ...
 ==> azure-arm:  -> Compute ResourceGroupName : 'Azuredevops'
-==> azure-arm:  -> Compute Name              : 'pkrvm8z8kbzdeb2'
-==> azure-arm:  -> Compute Location          : 'southcentralus'
+==> azure-arm:  -> Compute Name              : 'pkrvmyp41ushn6e'
+==> azure-arm:  -> Compute Location          : 'eastus'
 ==> azure-arm:  -> Image ResourceGroupName   : 'Azuredevops'
 ==> azure-arm:  -> Image Name                : 'WebServerImage'
-==> azure-arm:  -> Image Location            : 'southcentralus'
+==> azure-arm:  -> Image Location            : 'eastus'
 ==> azure-arm: 
 ==> azure-arm: Deleting individual resources ...
-==> azure-arm: Adding to deletion queue -> Microsoft.Compute/virtualMachines : 'pkrvm8z8kbzdeb2'
-==> azure-arm: Adding to deletion queue -> Microsoft.Network/networkInterfaces : 'pkrni8z8kbzdeb2'
-==> azure-arm: Adding to deletion queue -> Microsoft.Network/virtualNetworks : 'pkrvn8z8kbzdeb2'
-==> azure-arm: Adding to deletion queue -> Microsoft.Network/publicIPAddresses : 'pkrip8z8kbzdeb2'
+==> azure-arm: Adding to deletion queue -> Microsoft.Compute/virtualMachines : 'pkrvmyp41ushn6e'
+==> azure-arm: Adding to deletion queue -> Microsoft.Network/networkInterfaces : 'pkrniyp41ushn6e'
+==> azure-arm: Adding to deletion queue -> Microsoft.Network/publicIPAddresses : 'pkripyp41ushn6e'
+==> azure-arm: Adding to deletion queue -> Microsoft.Network/virtualNetworks : 'pkrvnyp41ushn6e'
+==> azure-arm: Attempting deletion -> Microsoft.Compute/virtualMachines : 'pkrvmyp41ushn6e'
 ==> azure-arm: Waiting for deletion of all resources...
-==> azure-arm: Attempting deletion -> Microsoft.Network/virtualNetworks : 'pkrvn8z8kbzdeb2'
-==> azure-arm: Attempting deletion -> Microsoft.Network/networkInterfaces : 'pkrni8z8kbzdeb2'
-==> azure-arm: Attempting deletion -> Microsoft.Compute/virtualMachines : 'pkrvm8z8kbzdeb2'
-==> azure-arm: Attempting deletion -> Microsoft.Network/publicIPAddresses : 'pkrip8z8kbzdeb2'
+==> azure-arm: Attempting deletion -> Microsoft.Network/virtualNetworks : 'pkrvnyp41ushn6e'
+==> azure-arm: Attempting deletion -> Microsoft.Network/publicIPAddresses : 'pkripyp41ushn6e'
+==> azure-arm: Attempting deletion -> Microsoft.Network/networkInterfaces : 'pkrniyp41ushn6e'
 ==> azure-arm: Error deleting resource. Will retry.
-==> azure-arm: Name: pkrvn8z8kbzdeb2
-==> azure-arm: Error: network.VirtualNetworksClient#Delete: Failure sending request: StatusCode=400 -- Original Error: Code="InUseSubnetCannotBeDeleted" Message="Subnet pkrsn8z8kbzdeb2 is in use by /subscriptions/7da9aa2a-dee5-47d2-8cc8-ccb1d2a68c2d/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/pkrni8z8kbzdeb2/ipConfigurations/ipconfig and cannot be deleted. In order to delete the subnet, delete all the resources within the subnet. See aka.ms/deletesubnet." Details=[]
+==> azure-arm: Name: pkrvnyp41ushn6e
+==> azure-arm: Error: network.VirtualNetworksClient#Delete: Failure sending request: StatusCode=400 -- Original Error: Code="InUseSubnetCannotBeDeleted" Message="Subnet pkrsnyp41ushn6e is in use by /subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/pkrniyp41ushn6e/ipConfigurations/ipconfig and cannot be deleted. In order to delete the subnet, delete all the resources within the subnet. See aka.ms/deletesubnet." Details=[]
 ==> azure-arm:
 ==> azure-arm: Error deleting resource. Will retry.
-==> azure-arm: Name: pkrip8z8kbzdeb2
-==> azure-arm: Error: network.PublicIPAddressesClient#Delete: Failure sending request: StatusCode=400 -- Original Error: Code="PublicIPAddressCannotBeDeleted" Message="Public IP address /subscriptions/7da9aa2a-dee5-47d2-8cc8-ccb1d2a68c2d/resourceGroups/Azuredevops/providers/Microsoft.Network/publicIPAddresses/pkrip8z8kbzdeb2 can not be deleted since it is still allocated to resource /subscriptions/7da9aa2a-dee5-47d2-8cc8-ccb1d2a68c2d/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/pkrni8z8kbzdeb2/ipConfigurations/ipconfig. In order to delete the public IP, disassociate/detach the Public IP address from the resource.  To learn how to do this, see aka.ms/deletepublicip." Details=[]
+==> azure-arm: Name: pkripyp41ushn6e
+==> azure-arm: Error: network.PublicIPAddressesClient#Delete: Failure sending request: StatusCode=400 -- Original Error: Code="PublicIPAddressCannotBeDeleted" Message="Public IP address /subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Network/publicIPAddresses/pkripyp41ushn6e can not be deleted since it is still allocated to resource /subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Network/networkInterfaces/pkrniyp41ushn6e/ipConfigurations/ipconfig. In order to delete the public IP, disassociate/detach the Public IP address from the resource.  To learn how to do this, see aka.ms/deletepublicip." Details=[]
 ==> azure-arm:
-==> azure-arm: Attempting deletion -> Microsoft.Network/virtualNetworks : 'pkrvn8z8kbzdeb2'
-==> azure-arm: Attempting deletion -> Microsoft.Network/publicIPAddresses : 'pkrip8z8kbzdeb2'
-==> azure-arm:  Deleting -> Microsoft.Compute/disks : '/subscriptions/7da9aa2a-dee5-47d2-8cc8-ccb1d2a68c2d/resourceGroups/Azuredevops/providers/Microsoft.Compute/disks/pkros8z8kbzdeb2'
-==> azure-arm: Removing the created Deployment object: 'pkrdp8z8kbzdeb2'
+==> azure-arm: Attempting deletion -> Microsoft.Network/virtualNetworks : 'pkrvnyp41ushn6e'
+==> azure-arm: Attempting deletion -> Microsoft.Network/publicIPAddresses : 'pkripyp41ushn6e'
+==> azure-arm:  Deleting -> Microsoft.Compute/disks : '/subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Compute/disks/pkrosyp41ushn6e'
+==> azure-arm: Removing the created Deployment object: 'pkrdpyp41ushn6e'
 ==> azure-arm: 
 ==> azure-arm: The resource group was not created by Packer, not deleting ...
-Build 'azure-arm' finished after 4 minutes 700 milliseconds.
+Build 'azure-arm' finished after 3 minutes 49 seconds.
 
-==> Wait completed after 4 minutes 700 milliseconds
+==> Wait completed after 3 minutes 49 seconds
 
 ==> Builds finished. The artifacts of successful builds are:
 --> azure-arm: Azure.ResourceManagement.VMImage:
@@ -81,5 +79,5 @@ Build 'azure-arm' finished after 4 minutes 700 milliseconds.
 OSType: Linux
 ManagedImageResourceGroupName: Azuredevops
 ManagedImageName: WebServerImage
-ManagedImageId: /subscriptions/7da9aa2a-dee5-47d2-8cc8-ccb1d2a68c2d/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/WebServerImage
-ManagedImageLocation: southcentralus
+ManagedImageId: /subscriptions/622411f9-056b-4cd2-8612-cd26091f1c5c/resourceGroups/Azuredevops/providers/Microsoft.Compute/images/WebServerImage
+ManagedImageLocation: eastus
